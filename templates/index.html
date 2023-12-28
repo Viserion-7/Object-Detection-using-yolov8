@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YOLO Object Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff; 
+            width: 60%; 
+            text-align: center;
+            border-radius: 10px;
+        }
+        form {
+            margin: 20px 0;
+        }
+        input {
+            padding: 10px;
+            margin: 0 5px;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Detect and Count People</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" id="video" name="video">
+            <input type="submit" value="Detect">
+        </form>
+        <p id="selected-filename">Selected File: None</p>
+        <img src="{{ url_for('video_feed', video_path=video_path) }}" alt="Video Stream">
+    </div>
+    
+    <script>
+        document.getElementById("video").addEventListener("change", function(event) {
+            const selectedVideo = event.target.files[0];
+            
+            if (selectedVideo) {
+                document.getElementById("selected-filename").textContent = "Selected File: " + selectedVideo.name;
+            } else {
+                document.getElementById("selected-filename").textContent = "Selected File: None";
+            }
+        });
+    </script>
+</body>
+</html>
